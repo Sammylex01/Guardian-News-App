@@ -26,7 +26,6 @@ public class NewsFeedAdapter extends ArrayAdapter<NewsFeed> {
 
         //get the{@link word} object located at this position in the list
         NewsFeed currentNewsFeedList = getItem(position);
-        fgvbhjk
 
         TextView newsTitleTextView = (TextView) ListItemView.findViewById(R.id.title);
         newsTitleTextView.setText(currentNewsFeedList.getTitle());
