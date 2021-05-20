@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        tools:text="Kenya debates lowering age of consent from 18 to 16"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Global development"
+        android:paddingBottom="10dp"
+        android:textSize="14sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/webUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="https://www.theguardian.com/global-development/2021/apr/28/kenya-debates-lowering-age-of-consent-from-18-to-16"
+        android:paddingBottom="3dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="021-04-28T06:15:26Z"
+        android:textColor="@color/black"/>
+</LinearLayout>
