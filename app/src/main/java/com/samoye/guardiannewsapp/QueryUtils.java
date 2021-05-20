@@ -170,7 +170,7 @@ public class QueryUtils {
                 String sectionName = results.getString("sectionName");
 
                 // Extract the value for the key called "webPublicationDate"
-                long publicationDate = results.getLong("webPublicationDate");
+                int publicationDate = results.getInt("webPublicationDate");
 
                 // Extract the value for the key called "webUrl"
                 String url = results.getString("webUrl");
