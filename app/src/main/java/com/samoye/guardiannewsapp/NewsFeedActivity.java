@@ -29,7 +29,7 @@ public class NewsFeedActivity extends AppCompatActivity implements LoaderManager
      * URL for earthquake data from the GUARDIAN dataset
      */
     private static final String GUARDIAN_REQUEST_URL =
-            "http://content.guardianapis.com/search";
+            "https://content.guardianapis.com/search";
 
     /**
      * Constant value for earthquake loader ID
