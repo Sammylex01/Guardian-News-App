@@ -150,7 +150,7 @@ public class QueryUtils {
 
             // Extract the JSONArray associated with the key called "features",
             // which represents a list of features (or earthquakes).
-            JSONArray newsArray = baseJsonResponse.getJSONArray("response");
+            JSONArray newsArray = baseJsonResponse.getJSONArray("results");
 
             // For each newsFeeds in the newsArray, create an {@link NewsFeed} object
             for (int i = 0; i < newsArray.length(); i++) {
@@ -161,7 +161,7 @@ public class QueryUtils {
                 // For a given newsFeeds, extract the JSONObject associated with the
                 // key called "results", which represents a list of all results
                 // for that newsFeeds.
-                JSONObject results = currentNewsFeed.getJSONObject("results");
+                JSONObject results = currentNewsFeed.getJSONObject("response");
 
                 // Extract the value for the key called "webTitle"
                 String webTitle = results.getString("webTitle");
@@ -187,6 +187,7 @@ public class QueryUtils {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
+            e.printStackTrace();
             Log.e("QueryUtils", "Problem parsing the news feed JSON results", e);
         }
 
