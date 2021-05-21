@@ -7,9 +7,9 @@ public class NewsFeed {
 
     public final String mUrl;
 
-    public final int mDate;
+    public final String mDate;
 
-    public NewsFeed(String title, String section, int date, String url){
+    public NewsFeed(String title, String section, String date, String url){
         mTitle = title;
         mSection = section;
         mDate = date;
@@ -24,11 +24,11 @@ public class NewsFeed {
         return mSection;
     }
 
-    public String getUrl() {
-        return mUrl;
+    public String getDate() {
+        return mDate;
     }
 
-    public int getDate() {
-        return mDate;
+    public String getUrl() {
+        return mUrl;
     }
 }

@@ -148,9 +148,14 @@ public class QueryUtils {
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(newsFeedJSON);
 
-            // Extract the JSONArray associated with the key called "features",
+            // For a given newsFeeds, extract the JSONObject associated with the
+            // key called "results", which represents a list of all results
+            // for that newsFeeds.
+            JSONObject response = baseJsonResponse.getJSONObject("response");
+
+            // Extract the JSONArray associated with the key called "results",
             // which represents a list of features (or earthquakes).
-            JSONArray newsArray = baseJsonResponse.getJSONArray("results");
+            JSONArray newsArray = response.getJSONArray("results");
 
             // For each newsFeeds in the newsArray, create an {@link NewsFeed} object
             for (int i = 0; i < newsArray.length(); i++) {
@@ -158,28 +163,23 @@ public class QueryUtils {
                 // Get a single newsFeeds at position i within the list of newsFeeds
                 JSONObject currentNewsFeed = newsArray.getJSONObject(i);
 
-                // For a given newsFeeds, extract the JSONObject associated with the
-                // key called "results", which represents a list of all results
-                // for that newsFeeds.
-                JSONObject results = currentNewsFeed.getJSONObject("response");
-
                 // Extract the value for the key called "webTitle"
-                String webTitle = results.getString("webTitle");
+                String webTitle = currentNewsFeed.getString("webTitle");
 
                 // Extract the value for the key called "sectionName"
-                String sectionName = results.getString("sectionName");
+                String sectionName = currentNewsFeed.getString("sectionName");
 
                 // Extract the value for the key called "webPublicationDate"
-                int publicationDate = results.getInt("webPublicationDate");
+                String publicationDate = currentNewsFeed.getString("webPublicationDate");
 
                 // Extract the value for the key called "webUrl"
-                String url = results.getString("webUrl");
+                String url = currentNewsFeed.getString("webUrl");
 
                 // Create a new {@link NewsFeed} object with the webTitle, sectionName, publicationDate,
                 // and url from the JSON response.
                 NewsFeed news = new NewsFeed(webTitle, sectionName, publicationDate, url);
 
-                // Add the new {@link NewsFeed} to the list of earthquakes.
+                // Add the new {@link NewsFeed} to the list of news.
                 newsFeeds.add(news);
             }
 
@@ -191,7 +191,7 @@ public class QueryUtils {
             Log.e("QueryUtils", "Problem parsing the news feed JSON results", e);
         }
 
-        // Return the list of earthquakes
+        // Return the list of news
         return newsFeeds;
     }
 }
