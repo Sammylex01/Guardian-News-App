@@ -1,4 +1,4 @@
-package com.samoye.guardiannewsapp;
+ package com.samoye.guardiannewsapp;
 
 import android.text.TextUtils;
 import android.util.Log;
