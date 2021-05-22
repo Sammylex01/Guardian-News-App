@@ -86,8 +86,11 @@ public class NewsFeedActivity extends AppCompatActivity implements LoaderManager
                 // Create a new intent to view the earthquake URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsFeedUri);
 
-                // Send the intent to launch a new activity
-                startActivity(websiteIntent);
+                // Check to see if user's device has an app to handle intent, then send the intent to launch a new activity
+                if (websiteIntent.resolveActivity(getPackageManager()) != null){
+                    startActivity(websiteIntent);
+                }
+
 
                 // Get a reference to the ConnectivityManager to check state of network connectivity
                 ConnectivityManager connMgr = (ConnectivityManager)
@@ -119,9 +122,10 @@ public class NewsFeedActivity extends AppCompatActivity implements LoaderManager
         // Append query parameter and its value. For example, the `from-date=2021-03-0`
         uriBuilder.appendQueryParameter("from-date", "2021-03-01");
         uriBuilder.appendQueryParameter("q", "football");
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("api-key", "test");
 
-        // Return the completed uri `https://content.guardianapis.com/search?from-date=2021-03-01&q=football&api-key=test'
+        // Return the completed uri `https://content.guardianapis.com/search?from-date=2021-03-01&q=football&show-tags=contributor&api-key=test'
         return new NewsFeedLoader(this, uriBuilder.toString());
 
     }
@@ -135,8 +139,8 @@ public class NewsFeedActivity extends AppCompatActivity implements LoaderManager
         // Set empty state text to display "No newsFeedList found."
         mEmptyStateTextView.setText(R.string.no_newsFeed);
 
-        // Set internet error empty state text to display "Can't load data at the moment, check internet connection."
-        mEmptyStateTextView.setText(R.string.no_internet_connection);
+//        // Set internet error empty state text to display "Can't load data at the moment, check internet connection."
+//        mEmptyStateTextView.setText(R.string.no_internet_connection);
 
         // Clear the adapter of previous newsFeed data
         mAdapter.clear();

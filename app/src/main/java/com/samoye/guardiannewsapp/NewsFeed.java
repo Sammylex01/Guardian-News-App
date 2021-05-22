@@ -7,11 +7,14 @@ public class NewsFeed {
 
     public final String mUrl;
 
+    public final String mAuthor;
+
     public final String mDate;
 
-    public NewsFeed(String title, String section, String date, String url){
+    public NewsFeed(String title, String section, String author, String date, String url){
         mTitle = title;
         mSection = section;
+        mAuthor = author;
         mDate = date;
         mUrl = url;
     }
@@ -22,6 +25,10 @@ public class NewsFeed {
 
     public String getSection() {
         return mSection;
+    }
+
+    public String getAuthor() {
+        return mAuthor;
     }
 
     public String getDate() {

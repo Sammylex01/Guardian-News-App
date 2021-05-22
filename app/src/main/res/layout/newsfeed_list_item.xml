@@ -24,10 +24,10 @@
         android:textSize="14sp"/>
 
     <TextView
-        android:id="@+id/webUrl"
+        android:id="@+id/author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="https://www.theguardian.com/global-development/2021/apr/28/kenya-debates-lowering-age-of-consent-from-18-to-16"
+        tools:text="Jonathan Wilson"
         android:paddingBottom="3dp"/>
 
     <TextView
