@@ -157,13 +157,13 @@ public class QueryUtils {
             // which represents a list of features (or earthquakes).
             JSONArray newsArray = response.getJSONArray("results");
 
-            JSONArray tagsArray = response.optJSONArray("tags");
-
             // For each newsFeeds in the newsArray, create an {@link NewsFeed} object
             for (int i = 0; i < newsArray.length(); i++) {
 
                 // Get a single newsFeeds at position i within the list of newsFeeds
                 JSONObject currentNewsFeed = newsArray.getJSONObject(i);
+
+                JSONArray tagsArray = currentNewsFeed.optJSONArray("tags");
 
                 // Extract the value for the key called "webTitle"
                 String webTitle = currentNewsFeed.getString("webTitle");
@@ -177,24 +177,25 @@ public class QueryUtils {
                 // Extract the value for the key called "webUrl"
                 String url = currentNewsFeed.getString("webUrl");
 
-                String tag = currentNewsFeed.getString("tags");
+                String tag = currentNewsFeed.getString("type");
 
                 // Create a new {@link NewsFeed} object with the webTitle, sectionName, publicationDate,
-                // url, and author  from the JSON response.
-                NewsFeed news = new NewsFeed(webTitle, sectionName, publicationDate, url, contributor);
+                // url, and author from the JSON response.
+                NewsFeed news = new NewsFeed(webTitle, sectionName, publicationDate, url, tag);
 
                 // Add the new {@link NewsFeed} to the list of news.
                 newsFeeds.add(news);
+
+                for (int j = 0; j < tagsArray.length(); j++){
+
+                    JSONObject currentTags = newsArray.getJSONObject(j);
+
+                    // Extract the value for the key called "webTitle"
+                    currentTags.getString("webTitle");
+
+                }
             }
 
-            for (int j = 0; j < tagsArray.length(); j++){
-
-                JSONObject currentTags = newsArray.getJSONObject(j);
-
-                // Extract the value for the key called "webTitle"
-               currentTags.getString("webTitle");
-
-            }
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,

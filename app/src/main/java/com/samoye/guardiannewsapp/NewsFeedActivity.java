@@ -86,11 +86,8 @@ public class NewsFeedActivity extends AppCompatActivity implements LoaderManager
                 // Create a new intent to view the earthquake URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsFeedUri);
 
-                // Check to see if user's device has an app to handle intent, then send the intent to launch a new activity
-                if (websiteIntent.resolveActivity(getPackageManager()) != null){
-                    startActivity(websiteIntent);
-                }
-
+                // Send the intent to launch a new activity
+                startActivity(websiteIntent);
 
                 // Get a reference to the ConnectivityManager to check state of network connectivity
                 ConnectivityManager connMgr = (ConnectivityManager)
