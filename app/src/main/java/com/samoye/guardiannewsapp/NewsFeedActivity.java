@@ -146,6 +146,7 @@ public class NewsFeedActivity extends AppCompatActivity implements LoaderManager
         if (newsFeedList != null && !newsFeedList.isEmpty()) {
             mAdapter.addAll(newsFeedList);
             mAdapter.notifyDataSetChanged();
+            mEmptyStateTextView.setVisibility(View.GONE);
         }
     }
 
