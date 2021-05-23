@@ -157,45 +157,83 @@ public class QueryUtils {
             // which represents a list of features (or earthquakes).
             JSONArray newsArray = response.getJSONArray("results");
 
-            // For each newsFeeds in the newsArray, create an {@link NewsFeed} object
+            // For each news in the NewsArray, create an {@link News} object
             for (int i = 0; i < newsArray.length(); i++) {
+                // String for news's title, section, publicationDate, authorName , thumbnail, trailText and webUrl.
+                String title = "";
+                String section = "";
+                String publicationDate = "";
+                String authorName = "";
+                String thumbnail = "";
+                String trailText = "";
+                String webUrl = "";
 
-                // Get a single newsFeeds at position i within the list of newsFeeds
-                JSONObject currentNewsFeed = newsArray.getJSONObject(i);
+                // Get a single News story at position i within the list of News Articles
+                JSONObject currentNews = newsArray.getJSONObject(i);
 
-                JSONArray tagsArray = currentNewsFeed.optJSONArray("tags");
-
-                // Extract the value for the key called "webTitle"
-                String webTitle = currentNewsFeed.getString("webTitle");
-
-                // Extract the value for the key called "sectionName"
-                String sectionName = currentNewsFeed.getString("sectionName");
-
-                // Extract the value for the key called "webPublicationDate"
-                String publicationDate = currentNewsFeed.getString("webPublicationDate");
-
-                // Extract the value for the key called "webUrl"
-                String url = currentNewsFeed.getString("webUrl");
-
-                String tag = currentNewsFeed.getString("type");
-
-                // Create a new {@link NewsFeed} object with the webTitle, sectionName, publicationDate,
-                // url, and author from the JSON response.
-                NewsFeed news = new NewsFeed(webTitle, sectionName, publicationDate, url, tag);
-
-                // Add the new {@link NewsFeed} to the list of news.
-                newsFeeds.add(news);
-
-                for (int j = 0; j < tagsArray.length(); j++){
-
-                    JSONObject currentTags = newsArray.getJSONObject(j);
-
+                try {
                     // Extract the value for the key called "webTitle"
-                    currentTags.getString("webTitle");
-
+                    title = currentNews.getString("webTitle");
+                } catch (Exception e) {
+                    Log.v(LOG_TAG, "No title");
                 }
-            }
 
+                try {
+                    // Extract the value for the key called "sectionName"
+                    section = currentNews.getString("sectionName");
+                } catch (Exception e) {
+                    Log.v(LOG_TAG, "No section");
+                }
+
+                try {
+                    // Extract the value for the key called "webPublicationDate"
+                    publicationDate = currentNews.getString("webPublicationDate");
+                } catch (Exception e) {
+                    Log.v(LOG_TAG, "No Publication Date");
+                }
+
+                try {
+                    // Extract the JSONArray associated with the key called "tags",
+                    JSONArray tags = currentNews.getJSONArray("tags");
+                    // Loop through each item of tags
+                    for (int j = 0; j < tags.length(); j++) {
+                        JSONObject authorNameObject = tags.getJSONObject(j);
+                        // Extract the value for the key called "webTitle"
+                        authorName = authorNameObject.getString("webTitle");
+                    }
+                } catch (Exception e) {
+                    Log.v(LOG_TAG, "No author Name");
+                }
+
+                JSONObject subJsonObject = null;
+                try {
+                    // Extract the JSONObject associated with the key called "fields"
+                    subJsonObject = currentNews.getJSONObject("fields");
+                    // Extract the value for the key called "thumbnail"
+                    thumbnail = subJsonObject.getString("thumbnail");
+                } catch (Exception e) {
+                    Log.v(LOG_TAG, "No image for this piece of news");
+                }
+
+                try {
+                    // Extract the value for the key called "trailText"
+                    trailText = subJsonObject.getString("trailText");
+                } catch (Exception e) {
+                    Log.v(LOG_TAG, "No description for this piece of news");
+                }
+
+                try {
+                    // Extract the value for the key called "webUrl"
+                    webUrl = currentNews.getString("webUrl");
+                } catch (Exception e) {
+                    Log.v(LOG_TAG, "No Web Url");
+                }
+
+                // Create a new {@link News} object.
+                NewsFeed newsArticles = new NewsFeed(title, section, publicationDate, authorName, webUrl);
+                // Add the new news story to the list of news stories.
+                newsFeeds.add(newsArticles);
+            }
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
